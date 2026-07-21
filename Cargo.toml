@@ -2,8 +2,7 @@
 resolver = "2"
 members = [
     "core",
-    "jackson",
-    "jsonb",
+    "serde",
     "esc",
     "codegen-api",
     "codegen-processor",

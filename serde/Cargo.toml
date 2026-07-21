@@ -1,11 +1,11 @@
 [package]
-name = "ddd-4-rust-jsonb"
+name = "ddd-4-rust-serde"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
 authors.workspace = true
 repository.workspace = true
-description = "JSON-B-equivalent serde implementations for DDD building blocks (AbstractEvent, AbstractDomainEvent)"
+description = "Jackson-equivalent serde implementations for DDD building blocks (AbstractEvent, AbstractDomainEvent)"
 
 [dependencies]
 ddd-4-rust-core = { path = "../core" }
