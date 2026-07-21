@@ -6,6 +6,8 @@
 
 mod event_store;
 mod event_store_repository;
+mod aggregate_stream_id;
 
 pub use event_store::{CommonEvent, EventStore, EventStoreError, StreamEventsSlice, StreamId};
 pub use event_store_repository::EventStoreRepository;
+pub use aggregate_stream_id::AggregateStreamId;
