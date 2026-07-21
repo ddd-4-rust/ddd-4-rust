@@ -1,0 +1,15 @@
+[package]
+name = "ddd-4-rust-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+description = "DDD building blocks for Rust: Event, DomainEvent, EntityId, AggregateRoot, Repository"
+
+[dependencies]
+uuid = { version = "1", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+serde = { version = "1", features = ["derive"] }
+thiserror = "2"
+async-trait = "0.1"
