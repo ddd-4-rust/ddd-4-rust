@@ -1,0 +1,5 @@
+error: event handler must have the form fn handler(&mut self, event: &Event) -> Result<(), AggregateError>
+ --> tests/ui/fail_invalid_handler.rs:4:18
+  |
+4 | impl Aggregate { fn invalid(&self, _event: &Event) {} }
+  |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

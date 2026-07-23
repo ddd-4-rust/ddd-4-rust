@@ -1,0 +1,69 @@
+//! `jackson` 模块承载同名 Java 类型迁移后的 Rust 领域实现；文件名保持 `snake_case`，公开类型保持 `PascalCase`。
+//!
+//! Deprecated Java/Jackson naming facade backed entirely by `json::serde`.
+
+mod abstract_aggregate_exception_data;
+pub use abstract_aggregate_exception_data::AbstractAggregateExceptionData;
+
+mod abstract_domain_event;
+pub use abstract_domain_event::AbstractDomainEvent;
+
+mod abstract_event;
+pub use abstract_event::AbstractEvent;
+
+mod abstract_versioned_aggregate_exception_data;
+pub use abstract_versioned_aggregate_exception_data::AbstractVersionedAggregateExceptionData;
+
+mod aggregate_already_exists_exception_data;
+pub use aggregate_already_exists_exception_data::AggregateAlreadyExistsExceptionData;
+
+mod aggregate_deleted_exception_data;
+pub use aggregate_deleted_exception_data::AggregateDeletedExceptionData;
+
+mod aggregate_not_found_exception_data;
+pub use aggregate_not_found_exception_data::AggregateNotFoundExceptionData;
+
+mod aggregate_version_conflict_exception_data;
+pub use aggregate_version_conflict_exception_data::AggregateVersionConflictExceptionData;
+
+mod aggregate_version_jackson_deserializer;
+pub use aggregate_version_jackson_deserializer::AggregateVersionJacksonDeserializer;
+
+mod aggregate_version_jackson_serializer;
+pub use aggregate_version_jackson_serializer::AggregateVersionJacksonSerializer;
+
+mod aggregate_version_not_found_exception_data;
+pub use aggregate_version_not_found_exception_data::AggregateVersionNotFoundExceptionData;
+
+mod ddd4jackson_module;
+pub use ddd4jackson_module::Ddd4JacksonModule;
+
+mod decryption_failed_exception_data;
+pub use decryption_failed_exception_data::DecryptionFailedExceptionData;
+
+mod duplicate_encryption_key_id_exception_data;
+pub use duplicate_encryption_key_id_exception_data::DuplicateEncryptionKeyIdExceptionData;
+
+mod duplicate_entity_exception_data;
+pub use duplicate_entity_exception_data::DuplicateEntityExceptionData;
+
+mod encrypted_data_jackson;
+pub use encrypted_data_jackson::EncryptedDataJackson;
+
+mod encryption_key_id_unknown_exception_data;
+pub use encryption_key_id_unknown_exception_data::EncryptionKeyIdUnknownExceptionData;
+
+mod encryption_key_version_unknown_exception_data;
+pub use encryption_key_version_unknown_exception_data::EncryptionKeyVersionUnknownExceptionData;
+
+mod entity_id_jackson_deserializer;
+pub use entity_id_jackson_deserializer::EntityIdJacksonDeserializer;
+
+mod entity_id_jackson_serializer;
+pub use entity_id_jackson_serializer::EntityIdJacksonSerializer;
+
+mod entity_id_path_jackson_deserializer;
+pub use entity_id_path_jackson_deserializer::EntityIdPathJacksonDeserializer;
+
+mod entity_not_found_exception_data;
+pub use entity_not_found_exception_data::EntityNotFoundExceptionData;

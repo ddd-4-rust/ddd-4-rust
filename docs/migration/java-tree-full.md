@@ -1,60 +1,414 @@
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/MethodExecutor.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/StringBasedEntityType.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/HasEntityTypeConstant.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/ExpectedEntityIdPathValidator.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/EntityId.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/ExpectedEntityIdPath.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/AggregateVersion.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/EncryptedDataService.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/DuplicateEntityException.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/EntityNotFoundException.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/DecryptionFailedException.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/DomainEvent.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/AggregateCache.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/AggregateRootUuid.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/EntityType.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/AggregateVersionConflictException.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/AbstractAggregateRoot.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/ExceptionData.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/HasEntityTypeConstantValidator.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/ApplyEvent.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/AggregateRootId.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/IntegerEntityId.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/DomainEventExpectedEntityIdPath.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/Event.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/EntityIdFactory.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/Repository.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/AggregateAlreadyExistsException.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/AbstractEntity.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/DomainEventExpectedEntityIdPathValidator.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/AggregateNoCache.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/EncryptedData.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/JandexEntityIdFactory.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/AbstractAggregateException.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/AggregateNotFoundException.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/EncryptionKeyVersionUnknownException.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/EventType.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/EntityIdPath.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/DuplicateEncryptionKeyIdException.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/EncryptionKeyIdUnknownException.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/AggregateVersionNotFoundException.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/BusinessKey.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/Entity.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/ChildEntityLocator.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/AbstractVersionedAggregateException.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/Ddd4JUtils.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/AggregateRoot.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/EventId.java
-ddd-4-java/core/src/main/java/org/fuin/ddd4j/core/AggregateDeletedException.java
-ddd-4-java/jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/PersonName.java
-ddd-4-java/jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/PersonCreatedEvent.java
-ddd-4-java/jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/VendorIdJsonbAdapter.java
-ddd-4-java/jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/VendorKeyStr.java
-ddd-4-java/jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/PersonNameJsonbAdapter.java
-ddd-4-java/jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/PersonNotFoundException.java
-ddd-4-java/jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/VendorNameJsonbAdapter.java
-ddd-4-java/jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/VendorNameStr.java
-ddd-4-java/jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/VendorKey.java
-ddd-4-java/jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/DuplicateVendorKeyException.java
-ddd-4-java/jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/VendorId.java
-ddd-4-java/jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/PersonNameChangedEvent.java
+# Frozen Java 0.7.0 migration files
+
+Commit: `baa9a989`; mapped files: **410**.
+
+- `codegen/api/src/main/java/org/fuin/ddd4j/codegen/api/AggregateRootUuidVO.java`
+- `codegen/api/src/main/java/org/fuin/ddd4j/codegen/api/EventVO.java`
+- `codegen/api/src/main/java/org/fuin/ddd4j/codegen/api/IntegerEntityIdVO.java`
+- `codegen/api/src/main/java/org/fuin/ddd4j/codegen/api/SimpleValueObject.java`
+- `codegen/api/src/main/java/org/fuin/ddd4j/codegen/api/StringVO.java`
+- `codegen/api/src/main/java/org/fuin/ddd4j/codegen/api/package-info.java`
+- `codegen/api/src/test/java/org/fuin/ddd4j/codegen/api/ArchitectureTest.java`
+- `codegen/example/src-gen/main/java/org/fuin/ddd4j/codegen/example/TheRootCreatedEvent.java`
+- `codegen/example/src-gen/main/java/org/fuin/ddd4j/codegen/example/TheRootId.java`
+- `codegen/example/src-gen/main/java/org/fuin/ddd4j/codegen/example/TheRootName.java`
+- `codegen/example/src/main/java/org/fuin/ddd4j/codegen/example/TheRootCreatedEvent_GEN.java`
+- `codegen/example/src/main/java/org/fuin/ddd4j/codegen/example/TheRootId_GEN.java`
+- `codegen/example/src/main/java/org/fuin/ddd4j/codegen/example/TheRootName_GEN.java`
+- `codegen/processor/src/main/java/org/fuin/ddd4j/codegen/processor/AggregateRootUuidVOTemplate.java`
+- `codegen/processor/src/main/java/org/fuin/ddd4j/codegen/processor/Ddd4jCodeGenUtils.java`
+- `codegen/processor/src/main/java/org/fuin/ddd4j/codegen/processor/EventVOTemplate.java`
+- `codegen/processor/src/main/java/org/fuin/ddd4j/codegen/processor/IntegerEntityIdVOTemplate.java`
+- `codegen/processor/src/main/java/org/fuin/ddd4j/codegen/processor/StringVOTemplate.java`
+- `codegen/processor/src/main/java/org/fuin/ddd4j/codegen/processor/ValueObjectProcessor.java`
+- `codegen/processor/src/main/java/org/fuin/ddd4j/codegen/processor/ValueObjectTemplate.java`
+- `codegen/processor/src/main/resources/AggregateRootUuidVO.java`
+- `codegen/processor/src/main/resources/EventVO.java`
+- `codegen/processor/src/main/resources/IntegerEntityIdVO.java`
+- `codegen/processor/src/main/resources/StringVO.java`
+- `codegen/processor/src/test/java/org/fuin/ddd4j/codegen/processor/AggregateRootUuidVOTemplateTest.java`
+- `codegen/processor/src/test/java/org/fuin/ddd4j/codegen/processor/EventVOTemplateTest.java`
+- `codegen/processor/src/test/java/org/fuin/ddd4j/codegen/processor/ExpectedFileMatcher.java`
+- `codegen/processor/src/test/java/org/fuin/ddd4j/codegen/processor/IntegerEntityIdVOTemplateTest.java`
+- `codegen/processor/src/test/java/org/fuin/ddd4j/codegen/processor/MyId.java`
+- `codegen/processor/src/test/java/org/fuin/ddd4j/codegen/processor/StringVOTemplateTest.java`
+- `codegen/processor/src/test/java/org/fuin/ddd4j/codegen/processor/TestUtils.java`
+- `codegen/processor/src/test/resources/expected/CompanyId/AllConverters.java`
+- `codegen/processor/src/test/resources/expected/CompanyId/JaxbOnly.java`
+- `codegen/processor/src/test/resources/expected/CompanyId/JpaOnly.java`
+- `codegen/processor/src/test/resources/expected/CompanyId/JsonbOnly.java`
+- `codegen/processor/src/test/resources/expected/CompanyId/NoConverters.java`
+- `codegen/processor/src/test/resources/expected/CompanyId/OpenApiOnly.java`
+- `codegen/processor/src/test/resources/expected/CompanyKey/AllConverters.java`
+- `codegen/processor/src/test/resources/expected/MyEvent/Jackson.java`
+- `codegen/processor/src/test/resources/expected/MyEvent/Jaxb.java`
+- `codegen/processor/src/test/resources/expected/MyEvent/Jsonb.java`
+- `codegen/processor/src/test/resources/expected/RampId/AllConverters.java`
+- `codegen/processor/src/test/resources/expected/RampId/JaxbOnly.java`
+- `codegen/processor/src/test/resources/expected/RampId/JpaOnly.java`
+- `codegen/processor/src/test/resources/expected/RampId/JsonbOnly.java`
+- `codegen/processor/src/test/resources/expected/RampId/NoConverters.java`
+- `codegen/processor/src/test/resources/expected/RampId/OpenApiOnly.java`
+- `core/src/main/java/org/fuin/ddd4j/core/AbstractAggregateException.java`
+- `core/src/main/java/org/fuin/ddd4j/core/AbstractAggregateRoot.java`
+- `core/src/main/java/org/fuin/ddd4j/core/AbstractEntity.java`
+- `core/src/main/java/org/fuin/ddd4j/core/AbstractVersionedAggregateException.java`
+- `core/src/main/java/org/fuin/ddd4j/core/AggregateAlreadyExistsException.java`
+- `core/src/main/java/org/fuin/ddd4j/core/AggregateCache.java`
+- `core/src/main/java/org/fuin/ddd4j/core/AggregateDeletedException.java`
+- `core/src/main/java/org/fuin/ddd4j/core/AggregateNoCache.java`
+- `core/src/main/java/org/fuin/ddd4j/core/AggregateNotFoundException.java`
+- `core/src/main/java/org/fuin/ddd4j/core/AggregateRoot.java`
+- `core/src/main/java/org/fuin/ddd4j/core/AggregateRootId.java`
+- `core/src/main/java/org/fuin/ddd4j/core/AggregateRootUuid.java`
+- `core/src/main/java/org/fuin/ddd4j/core/AggregateVersion.java`
+- `core/src/main/java/org/fuin/ddd4j/core/AggregateVersionConflictException.java`
+- `core/src/main/java/org/fuin/ddd4j/core/AggregateVersionNotFoundException.java`
+- `core/src/main/java/org/fuin/ddd4j/core/ApplyEvent.java`
+- `core/src/main/java/org/fuin/ddd4j/core/BusinessKey.java`
+- `core/src/main/java/org/fuin/ddd4j/core/ChildEntityLocator.java`
+- `core/src/main/java/org/fuin/ddd4j/core/Ddd4JUtils.java`
+- `core/src/main/java/org/fuin/ddd4j/core/DecryptionFailedException.java`
+- `core/src/main/java/org/fuin/ddd4j/core/DomainEvent.java`
+- `core/src/main/java/org/fuin/ddd4j/core/DomainEventExpectedEntityIdPath.java`
+- `core/src/main/java/org/fuin/ddd4j/core/DomainEventExpectedEntityIdPathValidator.java`
+- `core/src/main/java/org/fuin/ddd4j/core/DuplicateEncryptionKeyIdException.java`
+- `core/src/main/java/org/fuin/ddd4j/core/DuplicateEntityException.java`
+- `core/src/main/java/org/fuin/ddd4j/core/EncryptedData.java`
+- `core/src/main/java/org/fuin/ddd4j/core/EncryptedDataService.java`
+- `core/src/main/java/org/fuin/ddd4j/core/EncryptionKeyIdUnknownException.java`
+- `core/src/main/java/org/fuin/ddd4j/core/EncryptionKeyVersionUnknownException.java`
+- `core/src/main/java/org/fuin/ddd4j/core/Entity.java`
+- `core/src/main/java/org/fuin/ddd4j/core/EntityId.java`
+- `core/src/main/java/org/fuin/ddd4j/core/EntityIdFactory.java`
+- `core/src/main/java/org/fuin/ddd4j/core/EntityIdPath.java`
+- `core/src/main/java/org/fuin/ddd4j/core/EntityNotFoundException.java`
+- `core/src/main/java/org/fuin/ddd4j/core/EntityType.java`
+- `core/src/main/java/org/fuin/ddd4j/core/Event.java`
+- `core/src/main/java/org/fuin/ddd4j/core/EventId.java`
+- `core/src/main/java/org/fuin/ddd4j/core/EventType.java`
+- `core/src/main/java/org/fuin/ddd4j/core/ExceptionData.java`
+- `core/src/main/java/org/fuin/ddd4j/core/ExpectedEntityIdPath.java`
+- `core/src/main/java/org/fuin/ddd4j/core/ExpectedEntityIdPathValidator.java`
+- `core/src/main/java/org/fuin/ddd4j/core/HasEntityTypeConstant.java`
+- `core/src/main/java/org/fuin/ddd4j/core/HasEntityTypeConstantValidator.java`
+- `core/src/main/java/org/fuin/ddd4j/core/IntegerEntityId.java`
+- `core/src/main/java/org/fuin/ddd4j/core/JandexEntityIdFactory.java`
+- `core/src/main/java/org/fuin/ddd4j/core/MethodExecutor.java`
+- `core/src/main/java/org/fuin/ddd4j/core/Repository.java`
+- `core/src/main/java/org/fuin/ddd4j/core/StringBasedEntityType.java`
+- `core/src/test/java/org/fuin/ddd4j/core/AbstractAggregateRootTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/AbstractEntityTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/AggregateAlreadyExistsExceptionTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/AggregateDeletedExceptionTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/AggregateNotFoundExceptionTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/AggregateRootUuidTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/AggregateVersionConflictExceptionTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/AggregateVersionNotFoundExceptionTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/AggregateVersionTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/ArchitectureTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/BaseTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/Ddd4JUtilsTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/DecryptionFailedExceptionTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/DomainEventExpectedEntityIdPathValidatorTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/DuplicateEncryptionKeyIdExceptionTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/DuplicateEntityExceptionTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/EncryptionKeyIdUnknownExceptionTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/EncryptionKeyVersionUnknownExceptionTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/EntityIdPathTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/EntityIdTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/EntityNotFoundExceptionTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/EventIdTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/EventTypeTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/ExpectedEntityIdPathValidatorTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/HasEntityTypeConstantValidatorTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/IntegerEntityIdTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/JandexEntityIdFactoryTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/MethodExecutorTest.java`
+- `core/src/test/java/org/fuin/ddd4j/core/StringBasedEntityTypeTest.java`
+- `core/src/test/java/org/fuin/ddd4j/coretest/ACreatedEvent.java`
+- `core/src/test/java/org/fuin/ddd4j/coretest/AId.java`
+- `core/src/test/java/org/fuin/ddd4j/coretest/ARoot.java`
+- `core/src/test/java/org/fuin/ddd4j/coretest/AbstractDomainEvent.java`
+- `core/src/test/java/org/fuin/ddd4j/coretest/AbstractEvent.java`
+- `core/src/test/java/org/fuin/ddd4j/coretest/BAddedEvent.java`
+- `core/src/test/java/org/fuin/ddd4j/coretest/BEntity.java`
+- `core/src/test/java/org/fuin/ddd4j/coretest/BId.java`
+- `core/src/test/java/org/fuin/ddd4j/coretest/BaseRoot.java`
+- `core/src/test/java/org/fuin/ddd4j/coretest/CAddedEvent.java`
+- `core/src/test/java/org/fuin/ddd4j/coretest/CEntity.java`
+- `core/src/test/java/org/fuin/ddd4j/coretest/CEvent.java`
+- `core/src/test/java/org/fuin/ddd4j/coretest/CId.java`
+- `core/src/test/java/org/fuin/ddd4j/coretest/DEvent.java`
+- `core/src/test/java/org/fuin/ddd4j/coretest/ImplRootId.java`
+- `core/src/test/java/org/fuin/ddd4j/coretest/PersonId.java`
+- `core/src/test/java/org/fuin/ddd4j/coretest/VendorId.java`
+- `esc/src/main/java/org/fuin/ddd4j/esc/AggregateStreamId.java`
+- `esc/src/main/java/org/fuin/ddd4j/esc/EventStoreRepository.java`
+- `esc/src/main/java/org/fuin/ddd4j/esc/package-info.java`
+- `esc/src/test/java/org/fuin/ddd4j/esc/AggregateStreamIdTest.java`
+- `esc/src/test/java/org/fuin/ddd4j/esc/ArchitectureTest.java`
+- `esc/src/test/java/org/fuin/ddd4j/esc/BaseTest.java`
+- `esc/src/test/java/org/fuin/ddd4j/esc/EventStoreRespositoryTest.java`
+- `esc/src/test/java/org/fuin/ddd4j/esc/VendorRepository.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/AbstractAggregateExceptionData.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/AbstractDomainEvent.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/AbstractEvent.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/AbstractVersionedAggregateExceptionData.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/AggregateAlreadyExistsExceptionData.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/AggregateDeletedExceptionData.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/AggregateNotFoundExceptionData.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/AggregateVersionConflictExceptionData.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/AggregateVersionJacksonDeserializer.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/AggregateVersionJacksonSerializer.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/AggregateVersionNotFoundExceptionData.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/Ddd4JacksonModule.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/DecryptionFailedExceptionData.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/DuplicateEncryptionKeyIdExceptionData.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/DuplicateEntityExceptionData.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/EncryptedDataJackson.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/EncryptionKeyIdUnknownExceptionData.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/EncryptionKeyVersionUnknownExceptionData.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/EntityIdJacksonDeserializer.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/EntityIdJacksonSerializer.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/EntityIdPathJacksonDeserializer.java`
+- `jackson/src/main/java/org/fuin/ddd4j/jackson/EntityNotFoundExceptionData.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/AbstractDomainEventTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/AbstractEventTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/AggregateAlreadyExistsExceptionDataTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/AggregateDeletedExceptionDataTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/AggregateNotFoundExceptionDataTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/AggregateVersionConflictExceptionDataTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/AggregateVersionJacksonDeserializerTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/AggregateVersionJacksonSerializerTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/AggregateVersionNotFoundExceptionDataTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/ArchitectureTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/BaseTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/DecryptionFailedExceptionDataTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/DuplicateEncryptionKeyIdExceptionDataTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/DuplicateEntityExceptionDataTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/EncryptedDataJacksonTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/EncryptionKeyIdUnknownExceptionDataTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/EncryptionKeyVersionUnknownExceptionDataTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/EntityIdJacksonDeserializerTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/EntityIdJacksonSerializerTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/EntityIdPathJacksonDeserializerTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/EntityIdPathJacksonSerializerTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/EntityNotFoundExceptionDataTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/EventIdJacksonDeserializerTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/EventIdJacksonSerializerTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jackson/TestUtils.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/ACreatedEvent.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/AId.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/ARoot.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/BAddedEvent.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/BEntity.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/BId.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/BaseRoot.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/CAddedEvent.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/CEntity.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/CEvent.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/CId.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/DEvent.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/DuplicateVendorKeyException.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/ImplRootId.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/JacksonTestEntityIdFactory.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/Person.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/PersonCreatedEvent.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/PersonId.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/PersonName.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/PersonNameChangedEvent.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/PersonNotFoundException.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/TestJacksonAdapterModule.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/Vendor.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/VendorCreatedEvent.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/VendorEventId.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/VendorExampleTest.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/VendorId.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/VendorKey.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/VendorKeyStr.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/VendorKeyStrValidator.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/VendorName.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/VendorNameStr.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/VendorNameStrValidator.java`
+- `jackson/src/test/java/org/fuin/ddd4j/jacksontest/VendorRef.java`
+- `jacoco/src/main/java/org/fuin/ddd4j/jacoco/Dummy.java`
+- `jaxb/src/main/java/org/fuin/ddd4j/jaxb/AbstractAggregateExceptionData.java`
+- `jaxb/src/main/java/org/fuin/ddd4j/jaxb/AbstractDomainEvent.java`
+- `jaxb/src/main/java/org/fuin/ddd4j/jaxb/AbstractEvent.java`
+- `jaxb/src/main/java/org/fuin/ddd4j/jaxb/AbstractVersionedAggregateExceptionData.java`
+- `jaxb/src/main/java/org/fuin/ddd4j/jaxb/AggregateAlreadyExistsExceptionData.java`
+- `jaxb/src/main/java/org/fuin/ddd4j/jaxb/AggregateDeletedExceptionData.java`
+- `jaxb/src/main/java/org/fuin/ddd4j/jaxb/AggregateNotFoundExceptionData.java`
+- `jaxb/src/main/java/org/fuin/ddd4j/jaxb/AggregateVersionConflictExceptionData.java`
+- `jaxb/src/main/java/org/fuin/ddd4j/jaxb/AggregateVersionNotFoundExceptionData.java`
+- `jaxb/src/main/java/org/fuin/ddd4j/jaxb/AggregateVersionXmlAdapter.java`
+- `jaxb/src/main/java/org/fuin/ddd4j/jaxb/DecryptionFailedExceptionData.java`
+- `jaxb/src/main/java/org/fuin/ddd4j/jaxb/DuplicateEncryptionKeyIdExceptionData.java`
+- `jaxb/src/main/java/org/fuin/ddd4j/jaxb/DuplicateEntityExceptionData.java`
+- `jaxb/src/main/java/org/fuin/ddd4j/jaxb/EncryptedDataJaxb.java`
+- `jaxb/src/main/java/org/fuin/ddd4j/jaxb/EncryptionKeyIdUnknownExceptionData.java`
+- `jaxb/src/main/java/org/fuin/ddd4j/jaxb/EncryptionKeyVersionUnknownExceptionData.java`
+- `jaxb/src/main/java/org/fuin/ddd4j/jaxb/EntityIdPathXmlAdapter.java`
+- `jaxb/src/main/java/org/fuin/ddd4j/jaxb/EntityIdXmlAdapter.java`
+- `jaxb/src/main/java/org/fuin/ddd4j/jaxb/EntityNotFoundExceptionData.java`
+- `jaxb/src/main/java/org/fuin/ddd4j/jaxb/EventIdXmlAdapter.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxb/AbstractDomainEventTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxb/AbstractEventTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxb/AggregateAlreadyExistsExceptionDataTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxb/AggregateDeletedExceptionDataTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxb/AggregateNotFoundExceptionDataTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxb/AggregateVersionConflictExceptionDataTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxb/AggregateVersionNotFoundExceptionDataTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxb/AggregateVersionXmlAdapterTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxb/ArchitectureTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxb/BaseTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxb/DecryptionFailedExceptionDataTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxb/DuplicateEncryptionKeyIdExceptionDataTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxb/DuplicateEntityExceptionDataTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxb/EncryptedDataJaxbTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxb/EncryptionKeyIdUnknownExceptionDataTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxb/EncryptionKeyVersionUnknownExceptionDataTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxb/EntityIdPathXmlAdapterTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxb/EntityIdXmlAdapterTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxb/EntityNotFoundExceptionDataTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxb/EventIdXmlAdapterTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/ACreatedEvent.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/AId.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/ARoot.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/BAddedEvent.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/BEntity.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/BId.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/BaseRoot.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/CAddedEvent.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/CEntity.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/CEvent.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/CId.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/DEvent.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/DuplicateVendorKeyException.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/ImplRootId.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/JaxbTestEntityIdFactory.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/Person.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/PersonCreatedEvent.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/PersonId.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/PersonName.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/PersonNameChangedEvent.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/PersonNotFoundException.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/Vendor.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/VendorCreatedEvent.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/VendorEventId.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/VendorExampleTest.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/VendorId.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/VendorIdConverter.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/VendorKey.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/VendorKeyConverter.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/VendorKeyStr.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/VendorKeyStrValidator.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/VendorName.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/VendorNameConverter.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/VendorNameStr.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/VendorNameStrValidator.java`
+- `jaxb/src/test/java/org/fuin/ddd4j/jaxbtest/VendorRef.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/DuplicateVendorKeyException.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/Person.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/PersonCreatedEvent.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/PersonId.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/PersonIdJsonbAdapter.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/PersonName.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/PersonNameChangedEvent.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/PersonNameJsonbAdapter.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/PersonNotFoundException.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/Vendor.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/VendorCreatedEvent.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/VendorEventId.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/VendorId.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/VendorIdJsonbAdapter.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/VendorKey.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/VendorKeyJsonbAdapter.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/VendorKeyStr.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/VendorKeyStrValidator.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/VendorName.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/VendorNameJsonbAdapter.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/VendorNameStr.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/VendorNameStrValidator.java`
+- `jsonb-testmodel/src/main/java/org/fuin/ddd4j/jsonbtestmodel/VendorRef.java`
+- `jsonb-testmodel/src/test/java/org/fuin/ddd4j/jsonbtestmodel/ArchitectureTest.java`
+- `jsonb-testmodel/src/test/java/org/fuin/ddd4j/jsonbtestmodel/VendorExampleTest.java`
+- `jsonb/src/main/java/org/fuin/ddd4j/jsonb/AbstractAggregateExceptionData.java`
+- `jsonb/src/main/java/org/fuin/ddd4j/jsonb/AbstractDomainEvent.java`
+- `jsonb/src/main/java/org/fuin/ddd4j/jsonb/AbstractEvent.java`
+- `jsonb/src/main/java/org/fuin/ddd4j/jsonb/AbstractVersionedAggregateExceptionData.java`
+- `jsonb/src/main/java/org/fuin/ddd4j/jsonb/AggregateAlreadyExistsExceptionData.java`
+- `jsonb/src/main/java/org/fuin/ddd4j/jsonb/AggregateDeletedExceptionData.java`
+- `jsonb/src/main/java/org/fuin/ddd4j/jsonb/AggregateNotFoundExceptionData.java`
+- `jsonb/src/main/java/org/fuin/ddd4j/jsonb/AggregateVersionConflictExceptionData.java`
+- `jsonb/src/main/java/org/fuin/ddd4j/jsonb/AggregateVersionJsonbAdapter.java`
+- `jsonb/src/main/java/org/fuin/ddd4j/jsonb/AggregateVersionNotFoundExceptionData.java`
+- `jsonb/src/main/java/org/fuin/ddd4j/jsonb/DecryptionFailedExceptionData.java`
+- `jsonb/src/main/java/org/fuin/ddd4j/jsonb/DuplicateEncryptionKeyIdExceptionData.java`
+- `jsonb/src/main/java/org/fuin/ddd4j/jsonb/DuplicateEntityExceptionData.java`
+- `jsonb/src/main/java/org/fuin/ddd4j/jsonb/EncryptedDataJsonb.java`
+- `jsonb/src/main/java/org/fuin/ddd4j/jsonb/EncryptionKeyIdUnknownExceptionData.java`
+- `jsonb/src/main/java/org/fuin/ddd4j/jsonb/EncryptionKeyVersionUnknownExceptionData.java`
+- `jsonb/src/main/java/org/fuin/ddd4j/jsonb/EntityIdJsonbAdapter.java`
+- `jsonb/src/main/java/org/fuin/ddd4j/jsonb/EntityIdPathJsonbAdapter.java`
+- `jsonb/src/main/java/org/fuin/ddd4j/jsonb/EntityNotFoundExceptionData.java`
+- `jsonb/src/main/java/org/fuin/ddd4j/jsonb/EventIdJsonbAdapter.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/AbstractDomainEventTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/AbstractEventTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/AggregateAlreadyExistsExceptionDataTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/AggregateDeletedExceptionDataTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/AggregateNotFoundExceptionDataTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/AggregateVersionConflictExceptionDataTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/AggregateVersionJsonbAdapterTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/AggregateVersionNotFoundExceptionDataTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/ArchitectureTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/BaseTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/DecryptionFailedExceptionDataTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/DuplicateEncryptionKeyIdExceptionDataTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/DuplicateEntityExceptionDataTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/EncryptedDataJsonbTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/EncryptionKeyIdUnknownExceptionDataTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/EncryptionKeyVersionUnknownExceptionDataTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/EntityIdJsonbAdapterTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/EntityIdPathJsonbAdapterTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/EntityNotFoundExceptionDataTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/EventIdJsonbAdapterTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonb/TestUtils.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/ACreatedEvent.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/AId.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/ARoot.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/BAddedEvent.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/BEntity.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/BId.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/BaseRoot.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/CAddedEvent.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/CEntity.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/CEvent.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/CId.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/DEvent.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/DuplicateVendorKeyException.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/ImplRootId.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/JsonbTestEntityIdFactory.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/Person.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/PersonCreatedEvent.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/PersonId.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/PersonName.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/PersonNameChangedEvent.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/PersonNotFoundException.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/Vendor.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/VendorCreatedEvent.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/VendorEventId.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/VendorExampleTest.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/VendorId.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/VendorIdJsonbAdapter.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/VendorKey.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/VendorKeyJsonbAdapter.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/VendorKeyStr.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/VendorKeyStrValidator.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/VendorName.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/VendorNameJsonbAdapter.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/VendorNameStr.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/VendorNameStrValidator.java`
+- `jsonb/src/test/java/org/fuin/ddd4j/jsonbtest/VendorRef.java`
+- `junit/src/main/java/org/fuin/ddd4j/junit/Ddd4JConditions.java`

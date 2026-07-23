@@ -1,0 +1,193 @@
+//! `person_created_event` 模块承载同名 Java 类型迁移后的 Rust 领域实现；文件名保持 `snake_case`，公开类型保持 `PascalCase`。
+//!
+use crate::{ModelError, PersonId, PersonName, VendorRef, event_metadata::EventMetadata};
+use chrono::{DateTime, Utc};
+use ddd_4_rust_core::{
+    AggregateVersion, DomainEvent, EntityId, EntityIdPath, Event, EventId, EventType,
+};
+use std::sync::Arc;
+
+/// Domain event emitted when a person is added to a vendor.
+///
+/// `PersonCreatedEvent` 表示与同名 Java 类型对应的 Rust 领域对象。
+/// 该对象封装迁移后的状态和不变式；构造、转换及失败语义以公开方法的签名为准。
+pub struct PersonCreatedEvent {
+    metadata: EventMetadata,
+    path: EntityIdPath,
+    vendor_ref: VendorRef,
+    person_id: PersonId,
+    person_name: PersonName,
+    version: AggregateVersion,
+}
+
+impl PersonCreatedEvent {
+    #[must_use]
+    /// 执行 `builder` 对应的领域行为，参数和返回值遵循当前类型公开契约。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    pub fn builder() -> PersonCreatedEventBuilder {
+        PersonCreatedEventBuilder::default()
+    }
+    /// 创建当前类型的新实例，并在构造边界建立该类型要求的不变式。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    pub fn new(
+        vendor_ref: VendorRef,
+        person_id: PersonId,
+        person_name: PersonName,
+        version: AggregateVersion,
+    ) -> Result<Self, ModelError> {
+        let root_id = Arc::new(*vendor_ref.id()) as Arc<dyn EntityId>;
+        Ok(Self {
+            metadata: EventMetadata::new("PersonCreatedEvent")?,
+            path: EntityIdPath::new(vec![root_id])?,
+            vendor_ref,
+            person_id,
+            person_name,
+            version,
+        })
+    }
+    #[must_use]
+    /// 执行 `vendor_ref` 对应的领域行为，参数和返回值遵循当前类型公开契约。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    pub const fn vendor_ref(&self) -> &VendorRef {
+        &self.vendor_ref
+    }
+    #[must_use]
+    /// 执行 `person_id` 对应的领域行为，参数和返回值遵循当前类型公开契约。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    pub const fn person_id(&self) -> PersonId {
+        self.person_id
+    }
+    #[must_use]
+    /// 执行 `person_name` 对应的领域行为，参数和返回值遵循当前类型公开契约。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    pub const fn person_name(&self) -> &PersonName {
+        &self.person_name
+    }
+}
+impl std::fmt::Display for PersonCreatedEvent {
+    /// 按稳定且可读的格式输出当前值，不改变对象内部状态。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            formatter,
+            "Created person #{} with name '{}' for {}",
+            self.person_id, self.person_name, self.vendor_ref
+        )
+    }
+}
+impl Event for PersonCreatedEvent {
+    /// 执行 `event_id` 对应的领域行为，参数和返回值遵循当前类型公开契约。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    fn event_id(&self) -> &EventId {
+        &self.metadata.event_id
+    }
+    /// 执行 `event_type` 对应的领域行为，参数和返回值遵循当前类型公开契约。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    fn event_type(&self) -> &EventType {
+        &self.metadata.event_type
+    }
+    /// 执行 `event_timestamp` 对应的领域行为，参数和返回值遵循当前类型公开契约。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    fn event_timestamp(&self) -> &DateTime<Utc> {
+        &self.metadata.timestamp
+    }
+    /// 执行 `correlation_id` 对应的领域行为，参数和返回值遵循当前类型公开契约。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    fn correlation_id(&self) -> Option<&EventId> {
+        self.metadata.correlation_id.as_ref()
+    }
+    /// 执行 `causation_id` 对应的领域行为，参数和返回值遵循当前类型公开契约。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    fn causation_id(&self) -> Option<&EventId> {
+        self.metadata.causation_id.as_ref()
+    }
+}
+impl DomainEvent<PersonId> for PersonCreatedEvent {
+    /// 执行 `entity_id_path` 对应的领域行为，参数和返回值遵循当前类型公开契约。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    fn entity_id_path(&self) -> &EntityIdPath {
+        &self.path
+    }
+    /// 执行 `entity_id` 对应的领域行为，参数和返回值遵循当前类型公开契约。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    fn entity_id(&self) -> &PersonId {
+        &self.person_id
+    }
+    /// 执行 `aggregate_version` 对应的领域行为，参数和返回值遵循当前类型公开契约。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    fn aggregate_version(&self) -> Option<&AggregateVersion> {
+        Some(&self.version)
+    }
+}
+impl DomainEvent<dyn EntityId> for PersonCreatedEvent {
+    /// 执行 `entity_id_path` 对应的领域行为，参数和返回值遵循当前类型公开契约。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    fn entity_id_path(&self) -> &EntityIdPath {
+        &self.path
+    }
+    /// 执行 `entity_id` 对应的领域行为，参数和返回值遵循当前类型公开契约。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    fn entity_id(&self) -> &(dyn EntityId + 'static) {
+        &self.person_id
+    }
+    /// 执行 `aggregate_version` 对应的领域行为，参数和返回值遵循当前类型公开契约。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    fn aggregate_version(&self) -> Option<&AggregateVersion> {
+        Some(&self.version)
+    }
+}
+
+/// Checked builder matching the Java event builder contract.
+#[derive(Default)]
+/// `PersonCreatedEventBuilder` 表示与同名 Java 类型对应的 Rust 领域对象。
+/// 该对象封装迁移后的状态和不变式；构造、转换及失败语义以公开方法的签名为准。
+pub struct PersonCreatedEventBuilder {
+    vendor_ref: Option<VendorRef>,
+    person_id: Option<PersonId>,
+    person_name: Option<PersonName>,
+    version: Option<AggregateVersion>,
+}
+impl PersonCreatedEventBuilder {
+    #[must_use]
+    /// 执行 `vendor_ref` 对应的领域行为，参数和返回值遵循当前类型公开契约。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    pub fn vendor_ref(mut self, value: VendorRef) -> Self {
+        self.vendor_ref = Some(value);
+        self
+    }
+    #[must_use]
+    /// 执行 `person_id` 对应的领域行为，参数和返回值遵循当前类型公开契约。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    pub const fn person_id(mut self, value: PersonId) -> Self {
+        self.person_id = Some(value);
+        self
+    }
+    #[must_use]
+    /// 执行 `person_name` 对应的领域行为，参数和返回值遵循当前类型公开契约。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    pub fn person_name(mut self, value: PersonName) -> Self {
+        self.person_name = Some(value);
+        self
+    }
+    #[must_use]
+    /// 执行 `aggregate_version` 对应的领域行为，参数和返回值遵循当前类型公开契约。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    pub const fn aggregate_version(mut self, value: AggregateVersion) -> Self {
+        self.version = Some(value);
+        self
+    }
+    /// 根据已收集的参数构建领域对象；无效组合通过返回类型显式报告。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    pub fn build(self) -> Result<PersonCreatedEvent, ModelError> {
+        PersonCreatedEvent::new(
+            self.vendor_ref
+                .ok_or(ModelError::MissingBuilderField("vendor_ref"))?,
+            self.person_id
+                .ok_or(ModelError::MissingBuilderField("person_id"))?,
+            self.person_name
+                .ok_or(ModelError::MissingBuilderField("person_name"))?,
+            self.version
+                .ok_or(ModelError::MissingBuilderField("aggregate_version"))?,
+        )
+    }
+}

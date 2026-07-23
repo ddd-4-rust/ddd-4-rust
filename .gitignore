@@ -1,5 +1,8 @@
 /target
+**/target/
+.codegraph/
 **/*.rs.bk
-Cargo.lock
 .idea/
 *.iml
+__pycache__/
+*.pyc

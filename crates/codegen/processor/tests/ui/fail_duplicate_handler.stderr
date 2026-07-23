@@ -1,0 +1,5 @@
+error: duplicate event handler for this event type
+ --> tests/ui/fail_duplicate_handler.rs:6:34
+  |
+6 |     fn second(&mut self, _event: &Event) -> Result<(), ddd_4_rust_core::AggregateError> { Ok(()) }
+  |                                  ^^^^^^

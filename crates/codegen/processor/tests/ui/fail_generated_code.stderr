@@ -1,0 +1,5 @@
+error: value object requires exactly one field
+ --> tests/ui/fail_generated_code.rs:2:53
+  |
+2 | #[derive(IntegerEntityIdValueObject)] struct Invalid(i32, i32);
+  |                                                     ^^^^^^^^^^

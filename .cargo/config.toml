@@ -1,0 +1,6 @@
+[registries.ddd4rust-local]
+# CI and tools/verify_local_registry.sh override this index with the temporary
+# Ktra git index. Keeping the registry name here lets Cargo parse dual
+# path/version/registry dependencies during ordinary workspace development.
+index = "sparse+http://127.0.0.1:18000/index/"
+credential-provider = "cargo:token"

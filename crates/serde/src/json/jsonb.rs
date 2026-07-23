@@ -1,0 +1,63 @@
+//! `jsonb` 模块承载同名 Java 类型迁移后的 Rust 领域实现；文件名保持 `snake_case`，公开类型保持 `PascalCase`。
+//!
+//! Java-compatible JSONB namespace.
+
+mod abstract_aggregate_exception_data;
+pub use abstract_aggregate_exception_data::AbstractAggregateExceptionData;
+
+mod abstract_domain_event;
+pub use abstract_domain_event::AbstractDomainEvent;
+
+mod abstract_event;
+pub use abstract_event::AbstractEvent;
+
+mod abstract_versioned_aggregate_exception_data;
+pub use abstract_versioned_aggregate_exception_data::AbstractVersionedAggregateExceptionData;
+
+mod aggregate_already_exists_exception_data;
+pub use aggregate_already_exists_exception_data::AggregateAlreadyExistsExceptionData;
+
+mod aggregate_deleted_exception_data;
+pub use aggregate_deleted_exception_data::AggregateDeletedExceptionData;
+
+mod aggregate_not_found_exception_data;
+pub use aggregate_not_found_exception_data::AggregateNotFoundExceptionData;
+
+mod aggregate_version_conflict_exception_data;
+pub use aggregate_version_conflict_exception_data::AggregateVersionConflictExceptionData;
+
+mod aggregate_version_jsonb_adapter;
+pub use aggregate_version_jsonb_adapter::AggregateVersionJsonbAdapter;
+
+mod aggregate_version_not_found_exception_data;
+pub use aggregate_version_not_found_exception_data::AggregateVersionNotFoundExceptionData;
+
+mod decryption_failed_exception_data;
+pub use decryption_failed_exception_data::DecryptionFailedExceptionData;
+
+mod duplicate_encryption_key_id_exception_data;
+pub use duplicate_encryption_key_id_exception_data::DuplicateEncryptionKeyIdExceptionData;
+
+mod duplicate_entity_exception_data;
+pub use duplicate_entity_exception_data::DuplicateEntityExceptionData;
+
+mod encrypted_data_jsonb;
+pub use encrypted_data_jsonb::EncryptedDataJsonb;
+
+mod encryption_key_id_unknown_exception_data;
+pub use encryption_key_id_unknown_exception_data::EncryptionKeyIdUnknownExceptionData;
+
+mod encryption_key_version_unknown_exception_data;
+pub use encryption_key_version_unknown_exception_data::EncryptionKeyVersionUnknownExceptionData;
+
+mod entity_id_jsonb_adapter;
+pub use entity_id_jsonb_adapter::EntityIdJsonbAdapter;
+
+mod entity_id_path_jsonb_adapter;
+pub use entity_id_path_jsonb_adapter::EntityIdPathJsonbAdapter;
+
+mod entity_not_found_exception_data;
+pub use entity_not_found_exception_data::EntityNotFoundExceptionData;
+
+mod event_id_jsonb_adapter;
+pub use event_id_jsonb_adapter::EventIdJsonbAdapter;

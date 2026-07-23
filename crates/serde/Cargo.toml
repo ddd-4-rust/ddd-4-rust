@@ -1,0 +1,33 @@
+[package]
+name = "ddd-4-rust-serde"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+description = "Serde-native JSON and XML serialization for DDD building blocks"
+
+[dependencies]
+chrono.workspace = true
+chrono-tz.workspace = true
+ddd-4-rust-core.workspace = true
+quick-xml = { workspace = true, optional = true }
+serde.workspace = true
+serde_json = { workspace = true, optional = true }
+thiserror.workspace = true
+uuid.workspace = true
+
+[features]
+default = ["json"]
+json = ["dep:serde_json"]
+xml = ["dep:quick-xml"]
+
+[dev-dependencies]
+# Path-only by design: Cargo removes this unpublished fixture crate from the
+# packaged manifest while workspace tests still compile against the local model.
+ddd-4-rust-test-model = { path = "../test/model" }
+proptest.workspace = true
+
+[lints]
+workspace = true

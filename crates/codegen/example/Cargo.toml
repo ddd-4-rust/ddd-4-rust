@@ -1,0 +1,19 @@
+[package]
+name = "ddd-4-rust-codegen-example"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+publish = false
+description = "Compilation examples for generated DDD value objects"
+
+[dependencies]
+ddd-4-rust-codegen-api.workspace = true
+ddd-4-rust-codegen-processor.workspace = true
+serde.workspace = true
+uuid.workspace = true
+
+[lints]
+workspace = true

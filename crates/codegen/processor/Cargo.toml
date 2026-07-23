@@ -1,0 +1,26 @@
+[package]
+name = "ddd-4-rust-codegen-processor"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+description = "Proc macro code generation for ddd-4-rust"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2.workspace = true
+quote.workspace = true
+syn.workspace = true
+
+[dev-dependencies]
+chrono.workspace = true
+ddd-4-rust-core.workspace = true
+trybuild.workspace = true
+uuid.workspace = true
+
+[lints]
+workspace = true

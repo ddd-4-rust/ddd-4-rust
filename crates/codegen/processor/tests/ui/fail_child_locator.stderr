@@ -1,0 +1,5 @@
+error: child locator must have the form fn locator(&self, id: &Id) -> Option<&Entity>
+ --> tests/ui/fail_child_locator.rs:3:35
+  |
+3 | #[child_locator] impl Aggregate { fn invalid(&mut self) -> bool { false } }
+  |                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

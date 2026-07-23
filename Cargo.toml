@@ -1,17 +1,65 @@
 [workspace]
-resolver = "2"
+resolver = "3"
 members = [
-    "core",
-    "serde",
-    "esc",
-    "codegen-api",
-    "codegen-processor",
-    "test",
+    "crates/core",
+    "crates/serde",
+    "crates/esc",
+    "crates/codegen/api",
+    "crates/codegen/processor",
+    "crates/codegen/example",
+    "crates/test/model",
+    "crates/test/support",
 ]
 
 [workspace.package]
 version = "0.7.0"
-edition = "2021"
+edition = "2024"
+rust-version = "1.85"
 license = "LGPL-3.0-or-later"
 authors = ["Michael Schnell"]
 repository = "https://github.com/fuinorg/ddd-4-rust"
+readme = "README.md"
+keywords = ["ddd", "cqrs", "event-sourcing", "domain-driven-design"]
+categories = ["development-tools", "data-structures"]
+
+[workspace.dependencies]
+async-trait = "0.1.91"
+chrono = { version = "0.4.45", default-features = false, features = ["clock", "serde", "std"] }
+chrono-tz = { version = "0.10.4", features = ["serde"] }
+inventory = "0.3.24"
+proc-macro2 = "1.0.107"
+proptest = "1.11.0"
+quick-xml = { version = "0.41.0", features = ["serialize"] }
+quote = "1.0.47"
+serde = { version = "1.0.229", features = ["derive", "rc"] }
+serde_json = "1.0.151"
+syn = { version = "3.0.3", features = ["extra-traits", "full"] }
+thiserror = "2.0.19"
+trybuild = "1.0.118"
+uuid = { version = "1.24.0", features = ["serde", "v4"] }
+
+ddd-4-rust-core = { path = "crates/core", version = "0.7.0", registry = "ddd4rust-local" }
+ddd-4-rust-serde = { path = "crates/serde", version = "0.7.0", registry = "ddd4rust-local" }
+ddd-4-rust-esc = { path = "crates/esc", version = "0.7.0", registry = "ddd4rust-local" }
+ddd-4-rust-codegen-api = { path = "crates/codegen/api", version = "0.7.0", registry = "ddd4rust-local" }
+ddd-4-rust-codegen-processor = { path = "crates/codegen/processor", version = "0.7.0", registry = "ddd4rust-local" }
+ddd-4-rust-codegen-example = { path = "crates/codegen/example", version = "0.7.0" }
+ddd-4-rust-test = { path = "crates/test/support", version = "0.7.0", registry = "ddd4rust-local" }
+ddd-4-rust-test-model = { path = "crates/test/model", version = "0.7.0" }
+
+[workspace.lints.rust]
+missing_docs = "deny"
+unsafe_code = "forbid"
+unused_must_use = "deny"
+
+[workspace.lints.rustdoc]
+broken_intra_doc_links = "deny"
+
+[workspace.lints.clippy]
+all = { level = "deny", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+expect_used = "deny"
+panic = "deny"
+todo = "deny"
+unimplemented = "deny"
+unwrap_used = "deny"

@@ -4,14 +4,14 @@
 >
 > [English](README.md) | [简体中文](README.zh-CN.md)
 
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-[![Rust](https://img.shields.io/badge/rust-2021-orange?logo=rust)](https://www.rust-lang.org)
-[![Edition](https://img.shields.io/badge/Edition-2021-orange)](https://doc.rust-lang.org/edition-guide/)
-[![Workspace Resolver](https://img.shields.io/badge/Resolver-v2-blueviolet)](https://doc.rust-lang.org/cargo/reference/resolver.html)
+[![License](https://img.shields.io/badge/License-LGPL--3.0--or--later-blue.svg)](https://spdx.org/licenses/LGPL-3.0-or-later.html)
+[![Rust](https://img.shields.io/badge/MSRV-1.85-orange?logo=rust)](https://www.rust-lang.org)
+[![Edition](https://img.shields.io/badge/Edition-2024-orange)](https://doc.rust-lang.org/edition-guide/)
+[![Workspace Resolver](https://img.shields.io/badge/Resolver-v3-blueviolet)](https://doc.rust-lang.org/cargo/reference/resolver.html)
 [![Workspace Version](https://img.shields.io/badge/version-0.7.0-blue)](https://github.com/ddd-4-rust/ddd-4-rust)
 [![Org](https://img.shields.io/badge/Org-ddd--4--rust-6366f1)](https://github.com/ddd-4-rust)
 [![Java Source](https://img.shields.io/badge/移植自-fuinorg/ddd--4--java-green?logo=github)](https://github.com/fuinorg/ddd-4-java)
-[![Progress](https://img.shields.io/badge/迁移进度-58%25-yellow)](docs/MIGRATION_STATUS.md)
+[![Progress](https://img.shields.io/badge/迁移进度-410%2F410-brightgreen)](docs/MIGRATION_STATUS.md)
 
 ---
 
@@ -33,8 +33,8 @@
 | **仓库** | [fuinorg/ddd-4-java](https://github.com/fuinorg/ddd-4-java) | [ddd-4-rust/ddd-4-rust](https://github.com/ddd-4-rust/ddd-4-rust) |
 | **所有者** | [fuinorg](https://github.com/fuinorg) | [ddd-4-rust 组织](https://github.com/ddd-4-rust) |
 | **维护者** | Michael Schnell | hiwepy |
-| **语言** | Java 17 | Rust 2021 |
-| **许可证** | LGPLv3 | Apache 2.0 |
+| **语言** | Java 17 | Rust 2024 |
+| **许可证** | LGPLv3 | LGPL-3.0-or-later |
 | **版本基线** | 0.7.0 | 0.7.0 |
 | **API 兼容性** | — | 1:1 功能等价（必要时采用 idiomatic 写法） |
 
@@ -59,19 +59,18 @@
 ## 🧱 Workspace 结构
 
 ```text
-ddd-4-rust/                     ← Cargo Workspace (resolver = 2)
-├── core/                       ← 核心：Event / DomainEvent / AggregateRoot / EntityId / Repository
-│   └── ddd-4-rust-core
-├── serde/                      ← Jackson 等价物：AbstractEvent / Serializer / Deserializer
-│   └── ddd-4-rust-serde
-├── esc/                        ← 事件溯源上下文：EventStore / Repository / StreamId
-│   └── ddd-4-rust-esc
-├── codegen-api/                ← proc-macro API surface
-│   └── ddd-4-rust-codegen-api
-├── codegen-processor/          ← proc-macro 实现
-│   └── ddd-4-rust-codegen-processor
-├── test/                       ← 测试工具与共享 fixtures
-│   └── ddd-4-rust-test
+ddd-4-rust/                     ← Cargo Workspace (resolver = 3)
+├── crates/
+│   ├── core/                   ← ddd-4-rust-core
+│   ├── serde/                  ← ddd-4-rust-serde
+│   ├── esc/                    ← ddd-4-rust-esc
+│   ├── codegen/
+│   │   ├── api/                ← ddd-4-rust-codegen-api
+│   │   ├── processor/          ← ddd-4-rust-codegen-processor
+│   │   └── example/            ← 生成结果与编译样例，publish = false
+│   └── test/
+│       ├── support/            ← ddd-4-rust-test
+│       └── model/              ← 跨序列化测试模型，publish = false
 └── docs/
     ├── ARCHITECTURE.md         ← 架构与 Java 对照
     ├── IMPLEMENTATION_PLAN.md  ← 实施计划
@@ -84,10 +83,10 @@ ddd-4-rust/                     ← Cargo Workspace (resolver = 2)
 |---|---|---|---|
 | `ddd-4-rust-core` | 0.7.0 | 核心类型 / trait / 错误 / Repository SPI | （无内部依赖） |
 | `ddd-4-rust-serde` | 0.7.0 | 事件的 Serde 集成 | core, serde |
-| `ddd-4-rust-esc` | 0.7.0 | 事件存储上下文（Repository / StreamId） | core, serde |
-| `ddd-4-rust-codegen-api` | 0.7.0 | proc-macro API 表面 | syn, quote |
-| `ddd-4-rust-codegen-processor` | 0.7.0 | proc-macro 实现 | syn, quote, codegen-api |
-| `ddd-4-rust-test` | 0.7.0 | 测试工具与共享 fixtures | core |
+| `ddd-4-rust-esc` | 0.7.0 | 事件存储上下文（Repository / StreamId） | core |
+| `ddd-4-rust-codegen-api` | 0.7.0 | 代码生成契约 | （无内部依赖） |
+| `ddd-4-rust-codegen-processor` | 0.7.0 | proc-macro 实现 | syn, quote |
+| `ddd-4-rust-test` | 0.7.0 | 测试工具与共享 fixtures | core, serde, esc |
 
 ---
 
@@ -148,6 +147,12 @@ cargo test  --workspace
 cargo doc   --workspace --no-deps --open
 ```
 
+### Serde JSON
+
+`ddd-4-rust-serde` 仅使用 Serde 实现 JSON 序列化。新代码统一使用
+`ddd_4_rust_serde::json::serde`；旧的 `json::jackson` 路径只是已弃用的
+源码迁移兼容门面，不再包含独立序列化实现。
+
 ---
 
 ## 🆚 与 Java 版本的差异
@@ -157,7 +162,7 @@ cargo doc   --workspace --no-deps --open
 | 标识 | 泛型 `Entity<ID>` | Phantom 类型 `Entity<TId>` |
 | 可变性 | 可变聚合 + 重放 | 内部事件溯源重建 |
 | 线程模型 | 同步 | `async-trait` 优先，同步 fallback |
-| 序列化 | Jackson 模块 | Serde feature flags |
+| 序列化 | Jackson 模块 | Serde/serde_json feature flags |
 | 注解 | 运行时 `@ApplyEvent` | 编译期 `#[apply_event]` proc-macro |
 | 类型参数 | `<ID extends AggregateRootId>` | `PhantomData<TId>` 零成本 |
 | 错误处理 | checked exceptions | `Result<T, E>` |
@@ -166,17 +171,15 @@ cargo doc   --workspace --no-deps --open
 
 ## 📊 迁移进度
 
-> 最后更新：2026-07-21
+> 最后更新：2026-07-23
 
-| crate | 目标 .rs 文件 | 已完成 | 完成率 |
+| Java 映射子域 | 目标 | 已完成 | 完成率 |
 |---|---|---|---|
-| `ddd-4-rust-core` | 27 | 17 | 63% |
-| `ddd-4-rust-serde` | 9 | 3 | 33% |
-| `ddd-4-rust-esc` | 4 | 3 | 75% |
-| `ddd-4-rust-codegen-api` | 1 | 1 | 100% |
-| `ddd-4-rust-codegen-processor` | 1 | 1(*) | 10%（stub） |
-| `ddd-4-rust-test` | 1 | 1 | 100% |
-| **总计** | **~45** | **26** | **~58%** |
+| `core + esc` | 102 | 102 | 100% |
+| `jackson + jsonb + jaxb + test-model` | 259 | 259 | 100% |
+| `codegen` | 47 | 47 | 100% |
+| `junit + jacoco` | 2 | 2 | 100% |
+| **总计** | **410** | **410** | **100%** |
 
 完整进度：[`docs/MIGRATION_STATUS.md`](docs/MIGRATION_STATUS.md)
 
@@ -197,7 +200,7 @@ cargo doc   --workspace --no-deps --open
 | `@ApplyEvent`（Java） | `#[apply_event]`（Rust） | `codegen-processor` |
 | `@ChildEntityLocator` | `#[child_locator]` | `codegen-processor` |
 | `@HasEntityTypeConstant` | `#[derive(EntityId)]` | `codegen-processor` |
-| `AbstractEvent`（Jackson） | `AbstractEvent` struct | `serde` |
+| Java `AbstractEvent` | Serde `AbstractEvent` struct | `serde` |
 | `EventStoreRepository` | `EventStoreRepository` struct | `esc` |
 
 ---
@@ -214,7 +217,7 @@ cargo doc   --workspace --no-deps --open
 
 ## 📄 许可证
 
-本 Rust 移植版采用 **Apache 2.0** 许可证 —— 见 [LICENSE](LICENSE)。
+本 Rust 移植版采用 **LGPL-3.0-or-later** 许可证。
 
 原 Java 源（来自 [`fuinorg/ddd-4-java`](https://github.com/fuinorg/ddd-4-java)）采用 **LGPLv3**。根据 LGPLv3 的条款，衍生作品可以使用不同的许可证，但必须明确标注原始来源。我们在上面的"致谢"部分显著地做了这一点。
 

@@ -1,0 +1,20 @@
+[package]
+name = "ddd-4-rust-test-model"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+publish = false
+description = "Shared compatibility model for ddd-4-rust serializer tests"
+
+[dependencies]
+chrono.workspace = true
+ddd-4-rust-core.workspace = true
+serde.workspace = true
+thiserror.workspace = true
+uuid.workspace = true
+
+[lints]
+workspace = true

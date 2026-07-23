@@ -1,0 +1,7 @@
+error: #[apply_event] does not accept arguments
+ --> tests/ui/fail_invalid_attribute.rs:3:1
+  |
+3 | #[apply_event(unknown)] impl Aggregate {}
+  | ^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: this error originates in the attribute macro `apply_event` (in Nightly builds, run with -Z macro-backtrace for more info)

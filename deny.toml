@@ -1,0 +1,33 @@
+[graph]
+all-features = true
+
+[advisories]
+yanked = "deny"
+ignore = []
+
+[licenses]
+confidence-threshold = 0.8
+allow = [
+    "Apache-2.0",
+    "LGPL-3.0-or-later",
+    "MIT",
+    "Unicode-3.0",
+]
+
+[bans]
+multiple-versions = "deny"
+wildcards = "allow"
+highlight = "all"
+allow = []
+deny = []
+# chrono's wasm/windows support still pulls syn 2 while the workspace and its
+# proc macros use syn 3. Remove this exception once those upstream macros move
+# to syn 3; the complete dependency chain is documented in docs/DEPENDENCY_EXCEPTIONS.md.
+skip = [{ name = "syn", version = "=2.0.119" }]
+skip-tree = []
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]
+allow-git = []

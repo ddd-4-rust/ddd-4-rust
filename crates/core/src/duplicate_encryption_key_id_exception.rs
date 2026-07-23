@@ -1,0 +1,38 @@
+//! `duplicate_encryption_key_id_exception` 模块承载同名 Java 类型迁移后的 Rust 领域实现；文件名保持 `snake_case`，公开类型保持 `PascalCase`。
+//!
+//! Java source: `org.fuin.ddd4j.core.DuplicateEncryptionKeyIdException`.
+
+use thiserror::Error;
+
+/// Raised when registering an encryption key identifier twice.
+#[derive(Debug, Clone, PartialEq, Eq, Error)]
+#[error("Duplicate keyId: {key_id}")]
+/// `DuplicateEncryptionKeyIdException` 表示与同名 Java 类型对应的 Rust 领域对象。
+/// 该对象封装迁移后的状态和不变式；构造、转换及失败语义以公开方法的签名为准。
+pub struct DuplicateEncryptionKeyIdException {
+    key_id: String,
+}
+
+impl DuplicateEncryptionKeyIdException {
+    /// Stable short identifier.
+    ///
+    /// `SHORT_ID` 是该类型公开的稳定常量。
+    /// 调用方可依赖其语义，但不应假定未写入公共契约的内部表示。
+    pub const SHORT_ID: &'static str = "DDD4J-DUPLICATE-ENCRYPTION_KEY_ID";
+    /// Creates the exception.
+    #[must_use]
+    /// 创建当前类型的新实例，并在构造边界建立该类型要求的不变式。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    pub fn new(key_id: impl Into<String>) -> Self {
+        Self {
+            key_id: key_id.into(),
+        }
+    }
+    /// Duplicate key identifier.
+    #[must_use]
+    /// 执行 `key_id` 对应的领域行为，参数和返回值遵循当前类型公开契约。
+    /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
+    pub fn key_id(&self) -> &str {
+        &self.key_id
+    }
+}

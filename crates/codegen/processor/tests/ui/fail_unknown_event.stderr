@@ -1,0 +1,5 @@
+error[E0425]: cannot find type `MissingEvent` in this scope
+ --> tests/ui/fail_unknown_event.rs:4:49
+  |
+4 | impl Aggregate { fn missing(&mut self, _event: &MissingEvent) -> Result<(), ddd_4_rust_core::AggregateError> { Ok(()) } }
+  |                                                 ^^^^^^^^^^^^ not found in this scope

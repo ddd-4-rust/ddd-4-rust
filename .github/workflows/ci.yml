@@ -1,0 +1,39 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, llvm-tools-preview, rustfmt
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo install cargo-deny --version 0.20.2 --locked
+      - run: cargo install cargo-llvm-cov --version 0.8.7 --locked
+      - run: python3 tools/audit_migration.py
+      - run: python3 tools/audit_rust_conventions.py
+      - run: cargo fmt --all -- --check
+      - run: cargo check --workspace --all-targets --all-features --locked
+      - run: cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
+      - run: cargo test --workspace --all-targets --all-features --locked
+      - run: cargo test --workspace --doc --all-features --locked
+      - run: RUSTDOCFLAGS="-D warnings" cargo doc --workspace --all-features --no-deps --locked
+      - run: cargo deny check
+      - run: cargo llvm-cov --workspace --all-features --fail-under-lines 80 -- --skip procedural_macro_contracts
+      - run: cargo llvm-cov -p ddd-4-rust-core --all-features --fail-under-lines 80
+      - run: cargo llvm-cov -p ddd-4-rust-serde --all-features --fail-under-lines 80
+      - run: cargo llvm-cov -p ddd-4-rust-esc --all-features --fail-under-lines 80
+
+  local-registry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo install ktra --version 0.7.0 --locked
+      - run: tools/verify_local_registry.sh

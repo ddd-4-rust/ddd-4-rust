@@ -5,14 +5,14 @@
 >
 > [English](README.md) | [简体中文](README.zh-CN.md)
 
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-[![Rust](https://img.shields.io/badge/rust-2021-orange?logo=rust)](https://www.rust-lang.org)
-[![Edition](https://img.shields.io/badge/Edition-2021-orange)](https://doc.rust-lang.org/edition-guide/)
-[![Workspace Resolver](https://img.shields.io/badge/Resolver-v2-blueviolet)](https://doc.rust-lang.org/cargo/reference/resolver.html)
+[![License](https://img.shields.io/badge/License-LGPL--3.0--or--later-blue.svg)](https://spdx.org/licenses/LGPL-3.0-or-later.html)
+[![Rust](https://img.shields.io/badge/MSRV-1.85-orange?logo=rust)](https://www.rust-lang.org)
+[![Edition](https://img.shields.io/badge/Edition-2024-orange)](https://doc.rust-lang.org/edition-guide/)
+[![Workspace Resolver](https://img.shields.io/badge/Resolver-v3-blueviolet)](https://doc.rust-lang.org/cargo/reference/resolver.html)
 [![Workspace Version](https://img.shields.io/badge/version-0.7.0-blue)](https://github.com/ddd-4-rust/ddd-4-rust)
 [![Org](https://img.shields.io/badge/Org-ddd--4--rust-6366f1)](https://github.com/ddd-4-rust)
 [![Java Source](https://img.shields.io/badge/Port%20of-fuinorg/ddd--4--java-green?logo=github)](https://github.com/fuinorg/ddd-4-java)
-[![Progress](https://img.shields.io/badge/Migration-58%25-yellow)](docs/MIGRATION_STATUS.md)
+[![Progress](https://img.shields.io/badge/Migration-410%2F410-brightgreen)](docs/MIGRATION_STATUS.md)
 
 ---
 
@@ -34,8 +34,8 @@ All credit for the **original architecture, API design, and Domain-Driven Design
 | **Repository** | [fuinorg/ddd-4-java](https://github.com/fuinorg/ddd-4-java) | [ddd-4-rust/ddd-4-rust](https://github.com/ddd-4-rust/ddd-4-rust) |
 | **Owner** | [fuinorg](https://github.com/fuinorg) | [ddd-4-rust org](https://github.com/ddd-4-rust) |
 | **Maintainer** | Michael Schnell | hiwepy |
-| **Language** | Java 17 | Rust 2021 |
-| **License** | LGPLv3 | Apache 2.0 |
+| **Language** | Java 17 | Rust 2024 |
+| **License** | LGPLv3 | LGPL-3.0-or-later |
 | **Version base** | 0.7.0 | 0.7.0 |
 | **API compatibility** | — | 1:1 functional (idiomatic where required) |
 
@@ -60,19 +60,18 @@ Built on Rust's type system: **newtype patterns, trait constraints, and PhantomD
 ## 🧱 Workspace Architecture / Workspace 结构
 
 ```text
-ddd-4-rust/                     ← Cargo Workspace (resolver = 2)
-├── core/                       ← 核心：Event / DomainEvent / AggregateRoot / EntityId / Repository
-│   └── ddd-4-rust-core
-├── serde/                      ← Jackson-equivalent: AbstractEvent / Serializer / Deserializer
-│   └── ddd-4-rust-serde
-├── esc/                        ← Event Sourcing Context: EventStore / Repository / StreamId
-│   └── ddd-4-rust-esc
-├── codegen-api/                ← proc-macro API surface
-│   └── ddd-4-rust-codegen-api
-├── codegen-processor/          ← proc-macro implementation
-│   └── ddd-4-rust-codegen-processor
-├── test/                       ← 测试工具与共享 fixtures
-│   └── ddd-4-rust-test
+ddd-4-rust/                     ← Cargo Workspace (resolver = 3)
+├── crates/
+│   ├── core/                   ← ddd-4-rust-core
+│   ├── serde/                  ← ddd-4-rust-serde
+│   ├── esc/                    ← ddd-4-rust-esc
+│   ├── codegen/
+│   │   ├── api/                ← ddd-4-rust-codegen-api
+│   │   ├── processor/          ← ddd-4-rust-codegen-processor
+│   │   └── example/            ← generated code checks, publish = false
+│   └── test/
+│       ├── support/            ← ddd-4-rust-test
+│       └── model/              ← serialization test model, publish = false
 └── docs/
     ├── ARCHITECTURE.md         ← 架构与 Java 对照
     ├── IMPLEMENTATION_PLAN.md  ← 实施计划
@@ -85,10 +84,10 @@ ddd-4-rust/                     ← Cargo Workspace (resolver = 2)
 |---|---|---|---|
 | `ddd-4-rust-core` | 0.7.0 | Core types / traits / errors / Repository SPI | (none internal) |
 | `ddd-4-rust-serde` | 0.7.0 | Serde integration for events | core, serde |
-| `ddd-4-rust-esc` | 0.7.0 | Event Store Context (Repository / StreamId) | core, serde |
-| `ddd-4-rust-codegen-api` | 0.7.0 | Proc-macro API surface | syn, quote |
-| `ddd-4-rust-codegen-processor` | 0.7.0 | Proc-macro implementation | syn, quote, codegen-api |
-| `ddd-4-rust-test` | 0.7.0 | Test utilities & shared fixtures | core |
+| `ddd-4-rust-esc` | 0.7.0 | Event Store Context (Repository / StreamId) | core |
+| `ddd-4-rust-codegen-api` | 0.7.0 | Code-generation contracts | (none internal) |
+| `ddd-4-rust-codegen-processor` | 0.7.0 | Proc-macro implementation | syn, quote |
+| `ddd-4-rust-test` | 0.7.0 | Test utilities & shared fixtures | core, serde, esc |
 
 ---
 
@@ -149,6 +148,12 @@ cargo test  --workspace
 cargo doc   --workspace --no-deps --open
 ```
 
+### Serde JSON
+
+`ddd-4-rust-serde` uses Serde as its only JSON implementation. New code should
+use `ddd_4_rust_serde::json::serde`; the old `json::jackson` path is a deprecated
+source-migration facade and contains no independent serializer implementation.
+
 ---
 
 ## 🆚 Differences from the Java version / 与 Java 版本的差异
@@ -158,7 +163,7 @@ cargo doc   --workspace --no-deps --open
 | Identity | Generic `Entity<ID>` | Phantom-typed `Entity<TId>` |
 | Mutability | Mutable aggregate + replay | Internal event-sourced reconstruction |
 | Threading | Synchronous | `async-trait` first, sync fallback |
-| Serialization | Jackson modules | Serde with feature flags |
+| Serialization | Jackson modules | Serde/serde_json with feature flags |
 | Annotations | `@ApplyEvent` runtime | `#[apply_event]` proc-macro at compile time |
 | Type parameters | `<ID extends AggregateRootId>` | `PhantomData<TId>` zero-cost |
 | Error handling | checked exceptions | `Result<T, E>` |
@@ -167,17 +172,15 @@ cargo doc   --workspace --no-deps --open
 
 ## 📊 Migration Status / 迁移进度
 
-> Last updated: 2026-07-21
+> Last updated: 2026-07-23
 
-| crate | Target .rs files | Completed | Completion |
+| Java mapping domain | Target | Completed | Completion |
 |---|---|---|---|
-| `ddd-4-rust-core` | 27 | 17 | 63% |
-| `ddd-4-rust-serde` | 9 | 3 | 33% |
-| `ddd-4-rust-esc` | 4 | 3 | 75% |
-| `ddd-4-rust-codegen-api` | 1 | 1 | 100% |
-| `ddd-4-rust-codegen-processor` | 1 | 1(*) | 10% (stub) |
-| `ddd-4-rust-test` | 1 | 1 | 100% |
-| **Overall** | **~45** | **26** | **~58%** |
+| `core + esc` | 102 | 102 | 100% |
+| `jackson + jsonb + jaxb + test-model` | 259 | 259 | 100% |
+| `codegen` | 47 | 47 | 100% |
+| `junit + jacoco` | 2 | 2 | 100% |
+| **Overall** | **410** | **410** | **100%** |
 
 Full status: see [`docs/MIGRATION_STATUS.md`](docs/MIGRATION_STATUS.md).
 
@@ -198,7 +201,7 @@ Full status: see [`docs/MIGRATION_STATUS.md`](docs/MIGRATION_STATUS.md).
 | `@ApplyEvent` (Java) | `#[apply_event]` (Rust) | `codegen-processor` |
 | `@ChildEntityLocator` | `#[child_locator]` | `codegen-processor` |
 | `@HasEntityTypeConstant` | `#[derive(EntityId)]` | `codegen-processor` |
-| `AbstractEvent` (Jackson) | `AbstractEvent` struct | `serde` |
+| Java `AbstractEvent` | Serde `AbstractEvent` struct | `serde` |
 | `EventStoreRepository` | `EventStoreRepository` struct | `esc` |
 
 ---
@@ -215,7 +218,7 @@ Full status: see [`docs/MIGRATION_STATUS.md`](docs/MIGRATION_STATUS.md).
 
 ## 📄 License
 
-This Rust port is licensed under **Apache 2.0** — see [LICENSE](LICENSE).
+This Rust port is licensed under **LGPL-3.0-or-later**.
 
 The original Java source from [`fuinorg/ddd-4-java`](https://github.com/fuinorg/ddd-4-java) is licensed under **LGPLv3**. By the terms of LGPLv3, derivative works may use a different license, but the original must be credited. We do so prominently in the Acknowledgement section above.
 
