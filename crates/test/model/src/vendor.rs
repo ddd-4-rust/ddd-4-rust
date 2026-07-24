@@ -100,12 +100,7 @@ impl Vendor {
     pub fn add_person(&mut self, name: PersonName) -> Result<PersonId, VendorError> {
         self.last_person_id = self.last_person_id.saturating_add(1);
         let id = PersonId::new(self.last_person_id);
-        let event = PersonCreatedEvent::new(
-            self.vendor_ref.clone(),
-            id,
-            name.clone(),
-            self.next_apply_version(),
-        )?;
+        let event = PersonCreatedEvent::new(self.vendor_ref.clone(), id, name.clone(), self.next_apply_version())?;
         self.persons.push(Person::new(id, name));
         self.changes.push(Box::new(event));
         Ok(id)

@@ -184,7 +184,10 @@ Java 命名兼容门面，所有行为委托给 Serde 实现，不引入 Jackson
 - `codegen/example` 和 `test/model` 设置 `publish = false`；
 - trybuild 覆盖合法展开、错误签名、重复处理器、未知事件、泛型、
   非法属性和生成代码编译失败，错误定位到输入 token；
-- Core、Serde、ESC 单独以及整个 Workspace 的行覆盖率均不得低于 80%。
+- Core、Serde、ESC 单独以及整个 Workspace 的可执行行覆盖率必须为 100%
+  （LCOV `DA:` 无 0 命中；由 `tools/check_lcov_full_coverage.py` 强制）。
+  `cargo llvm-cov` 汇总 Lines 因 Rust/LLVM 对花括号与 derive/async 区域的
+  统计偏差可略低于 100%，CI 以 `--fail-under-lines 98` 作为该汇总指标底线。
 
 ## 七、Web 框架映射边界
 
@@ -229,7 +232,8 @@ cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
 cargo test --workspace --all-targets --all-features --locked
 cargo test --workspace --doc --all-features --locked
 RUSTDOCFLAGS="-D warnings" cargo doc --workspace --all-features --no-deps --locked
-cargo llvm-cov --workspace --all-features --fail-under-lines 80
+cargo llvm-cov --workspace --all-features --lcov --output-path target/lcov.info --fail-under-lines 98
+python3 tools/check_lcov_full_coverage.py target/lcov.info
 cargo deny check
 cargo tree --workspace --duplicates
 ```

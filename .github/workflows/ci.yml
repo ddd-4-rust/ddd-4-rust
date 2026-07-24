@@ -24,10 +24,11 @@ jobs:
       - run: cargo test --workspace --doc --all-features --locked
       - run: RUSTDOCFLAGS="-D warnings" cargo doc --workspace --all-features --no-deps --locked
       - run: cargo deny check
-      - run: cargo llvm-cov --workspace --all-features --fail-under-lines 80 -- --skip procedural_macro_contracts
-      - run: cargo llvm-cov -p ddd-4-rust-core --all-features --fail-under-lines 80
-      - run: cargo llvm-cov -p ddd-4-rust-serde --all-features --fail-under-lines 80
-      - run: cargo llvm-cov -p ddd-4-rust-esc --all-features --fail-under-lines 80
+      - run: cargo llvm-cov --workspace --all-features --lcov --output-path target/lcov.info --fail-under-lines 98 -- --skip procedural_macro_contracts
+      - run: python3 tools/check_lcov_full_coverage.py target/lcov.info
+      - run: cargo llvm-cov -p ddd-4-rust-core --all-features --fail-under-lines 98
+      - run: cargo llvm-cov -p ddd-4-rust-serde --all-features --fail-under-lines 98
+      - run: cargo llvm-cov -p ddd-4-rust-esc --all-features --fail-under-lines 98
 
   local-registry:
     runs-on: ubuntu-latest

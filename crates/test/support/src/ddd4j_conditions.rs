@@ -35,14 +35,13 @@ impl Ddd4JConditions {
         Id: EntityId + ?Sized,
     {
         let type_name = std::any::type_name::<T>();
-        if type_name.ends_with("Event") {
-            Ok(())
-        } else {
-            Err(ConditionError {
+        if !type_name.ends_with("Event") {
+            return Err(ConditionError {
                 type_name,
                 rule: "domain event naming and trait contract",
-            })
+            });
         }
+        Ok(())
     }
 
     /// Uses trait bounds to prove the entity-ID and entity-type-constant contracts.
@@ -58,12 +57,11 @@ impl Ddd4JConditions {
     {
         let type_name = std::any::type_name::<T>();
         if T::ENTITY_TYPE.is_empty() {
-            Err(ConditionError {
+            return Err(ConditionError {
                 type_name,
                 rule: "non-empty ENTITY_TYPE constant",
-            })
-        } else {
-            Ok(())
+            });
         }
+        Ok(())
     }
 }

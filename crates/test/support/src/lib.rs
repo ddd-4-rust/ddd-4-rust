@@ -41,9 +41,10 @@ impl MemoryEventStore {
         &self,
     ) -> Result<MutexGuard<'_, std::collections::HashMap<String, Vec<CommonEvent>>>, EventStoreError>
     {
-        self.events
+        Ok(self
+            .events
             .lock()
-            .map_err(|_| EventStoreError::Other("memory event store lock poisoned".to_owned()))
+            .unwrap_or_else(std::sync::PoisonError::into_inner))
     }
 }
 

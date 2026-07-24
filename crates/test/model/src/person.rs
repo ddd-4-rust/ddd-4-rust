@@ -38,13 +38,7 @@ impl Person {
         new_name: PersonName,
         version: AggregateVersion,
     ) -> Result<PersonNameChangedEvent, ModelError> {
-        let event = PersonNameChangedEvent::new(
-            vendor_ref,
-            self.id,
-            self.name.clone(),
-            new_name.clone(),
-            version,
-        )?;
+        let event = PersonNameChangedEvent::new(vendor_ref, self.id, self.name.clone(), new_name.clone(), version)?;
         self.name = new_name;
         Ok(event)
     }

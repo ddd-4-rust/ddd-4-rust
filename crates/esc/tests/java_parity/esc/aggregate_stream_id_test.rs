@@ -22,6 +22,9 @@ fn exposes_stream_name_parameter_and_value() -> Result<(), Box<dyn std::error::E
 /// 执行 `equality_hash_and_display_use_wire_name` 对应的领域行为，参数和返回值遵循当前类型公开契约。
 /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
 fn equality_hash_and_display_use_wire_name() -> Result<(), Box<dyn std::error::Error>> {
+    use std::collections::HashSet;
+    use std::hash::Hash;
+
     let id = AggregateRootUuid::from_uuid("Vendor", Uuid::nil())?;
     let kind = StringBasedEntityType::new("Vendor")?;
     let first = AggregateStreamId::new(&kind, "vendorId", &id);
@@ -29,5 +32,11 @@ fn equality_hash_and_display_use_wire_name() -> Result<(), Box<dyn std::error::E
     assert_eq!(first, second);
     assert_eq!(first.as_string(), format!("Vendor-{}", Uuid::nil()));
     assert_eq!(first.to_string(), first.as_string());
+
+    let mut hasher = std::collections::hash_map::DefaultHasher::new();
+    first.hash(&mut hasher);
+    let mut set = HashSet::new();
+    set.insert(first.clone());
+    assert!(set.contains(&second));
     Ok(())
 }

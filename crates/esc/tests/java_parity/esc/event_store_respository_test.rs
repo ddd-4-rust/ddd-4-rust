@@ -137,3 +137,42 @@ fn maps_update_and_delete_failures() -> Result<(), Box<dyn std::error::Error>> {
     ));
     Ok(())
 }
+
+#[test]
+/// 读取空切片时映射为聚合不存在。
+fn read_maps_empty_event_slice_to_not_found() -> Result<(), Box<dyn std::error::Error>> {
+    let id = AggregateRootUuid::new("Vendor")?;
+    let repository = VendorRepository::new(boxed_store(StoreMode::ReadEmpty), "Vendor");
+    assert!(matches!(
+        block_on(repository.read(&id, |_| VendorAggregate::new())).err(),
+        Some(AggregateError::AggregateNotFound(_))
+    ));
+    Ok(())
+}
+
+#[test]
+/// 追加时连接失败走通用错误映射分支。
+fn add_maps_non_conflict_errors() -> Result<(), Box<dyn std::error::Error>> {
+    let aggregate = VendorAggregate::new()?;
+    let repository = VendorRepository::new(boxed_store(StoreMode::AppendConnection), "Vendor");
+    assert!(matches!(
+        block_on(repository.add(&aggregate)).err(),
+        Some(AggregateError::Other(_))
+    ));
+    Ok(())
+}
+
+#[test]
+/// 追加未提交变更时构建 `CommonEvent` 列表。
+fn add_builds_common_events_from_uncommitted_changes() -> Result<(), Box<dyn std::error::Error>> {
+    use super::base_test::StubDomainEvent;
+
+    let mut aggregate = VendorAggregate::new()?;
+    aggregate.version = 0;
+    aggregate
+        .changes
+        .push(Box::new(StubDomainEvent::new("VendorCreated", 0)));
+    let repository = VendorRepository::new(boxed_store(StoreMode::AppendOk), "Vendor");
+    block_on(repository.add(&aggregate))?;
+    Ok(())
+}

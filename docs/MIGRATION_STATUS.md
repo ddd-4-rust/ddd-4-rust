@@ -38,7 +38,7 @@ python3 tools/audit_migration.py
 python3 tools/audit_rust_conventions.py
 ```
 
-严格审计同时验证 410 行、两侧路径唯一、目标非空、snake_case、模块/Cargo 可达、实现/测试状态以及 332 个 Java 测试场景。扫描 Rust 源树时忽略 `.git` / `target` / `.codegraph`（与 inventory 一致），避免 trybuild 嵌套 `target` 被误报为未登记迁移文件。当前 Core、Serde、ESC 行覆盖率分别为 83.26%、91.18%、83.90%，全 Workspace 为 83.97%。
+严格审计同时验证 410 行、两侧路径唯一、目标非空、snake_case、模块/Cargo 可达、实现/测试状态以及 332 个 Java 测试场景。扫描 Rust 源树时忽略 `.git` / `target` / `.codegraph`（与 inventory 一致），避免 trybuild 嵌套 `target` 被误报为未登记迁移文件。当前全 Workspace **可执行行覆盖率为 100%**（LCOV `DA:0` 为空、函数覆盖 100%）；`cargo llvm-cov` 汇总 Lines 约 98.9%（Rust/LLVM 对花括号与 derive/async 区域的已知统计偏差），CI 以 `--fail-under-lines 98` + `tools/check_lcov_full_coverage.py` 双重门禁。
 
 Rust 规范审计同时验证虚拟 Workspace、8 个成员、Edition 2024、resolver
 3、MSRV 1.85、依赖集中继承、无 `mod.rs`、无 glob 公开重导出，以及 448

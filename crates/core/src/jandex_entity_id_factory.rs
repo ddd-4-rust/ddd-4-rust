@@ -49,14 +49,23 @@ pub struct JandexEntityIdFactory {
 }
 
 impl JandexEntityIdFactory {
-    /// Collects registrations and rejects duplicate entity types.
+    /// Collects inventory registrations and rejects duplicate entity types.
     ///
     /// 创建当前类型的新实例，并在构造边界建立该类型要求的不变式。
     /// 该方法不引入未声明的全局副作用，调用方应按签名处理返回结果。
     pub fn new() -> Result<Self, EntityIdRegistryError> {
-        let mut registrations = BTreeMap::new();
-        for registration in inventory::iter::<EntityIdRegistration> {
-            if registrations
+        Self::from_registrations(inventory::iter::<EntityIdRegistration>)
+    }
+
+    /// Builds a factory from an explicit registration list (also used by tests).
+    ///
+    /// 从给定注册项构建工厂，并在遇到重复实体类型时返回 `DuplicateType`。
+    pub fn from_registrations(
+        registrations: impl IntoIterator<Item = &'static EntityIdRegistration>,
+    ) -> Result<Self, EntityIdRegistryError> {
+        let mut map = BTreeMap::new();
+        for registration in registrations {
+            if map
                 .insert(registration.entity_type, registration)
                 .is_some()
             {
@@ -65,7 +74,9 @@ impl JandexEntityIdFactory {
                 ));
             }
         }
-        Ok(Self { registrations })
+        Ok(Self {
+            registrations: map,
+        })
     }
 
     /// Returns all known entity type names in deterministic order.

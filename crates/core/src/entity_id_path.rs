@@ -165,9 +165,6 @@ impl EntityIdPath {
     pub fn value_of(factory: &dyn EntityIdFactory, str: Option<&str>) -> Option<Self> {
         let str = str?;
         let entries: Vec<&str> = str.split(PATH_SEPARATOR).collect();
-        if entries.is_empty() {
-            return None;
-        }
         let mut ids: Vec<Arc<dyn EntityId>> = Vec::new();
         for entry in entries {
             // Parse "Type id" format
@@ -191,9 +188,6 @@ impl EntityIdPath {
             return false;
         }
         let entries: Vec<&str> = value.split(PATH_SEPARATOR).collect();
-        if entries.is_empty() {
-            return false;
-        }
         for entry in entries {
             if let Some(p) = entry.find(' ') {
                 let r#type = &entry[..p];

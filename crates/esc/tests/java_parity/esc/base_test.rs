@@ -230,3 +230,73 @@ pub fn block_on<F: Future>(future: F) -> F::Output {
         std::hint::spin_loop();
     }
 }
+
+/// 测试用领域事件，用于覆盖 `CommonEvent` 构建路径。
+pub struct StubDomainEvent {
+    id: ddd_4_rust_core::EventId,
+    kind: ddd_4_rust_core::EventType,
+    timestamp: chrono::DateTime<chrono::Utc>,
+    path: ddd_4_rust_core::EntityIdPath,
+    entity: AggregateRootUuid,
+    version: ddd_4_rust_core::AggregateVersion,
+}
+
+impl StubDomainEvent {
+    /// 构造带指定类型与版本号的测试事件。
+    pub fn new(event_type: &str, version: u32) -> Self {
+        let id = AggregateRootUuid::new("Vendor").expect("aggregate id");
+        let entity_id = std::sync::Arc::new(id.clone()) as std::sync::Arc<dyn EntityId>;
+        Self {
+            id: ddd_4_rust_core::EventId::new(),
+            kind: ddd_4_rust_core::EventType::new(event_type).expect("event type"),
+            timestamp: chrono::Utc::now(),
+            path: ddd_4_rust_core::EntityIdPath::new(vec![entity_id]).expect("path"),
+            entity: id,
+            version: ddd_4_rust_core::AggregateVersion::new(version),
+        }
+    }
+}
+
+impl ddd_4_rust_core::Event for StubDomainEvent {
+    /// 返回事件 ID。
+    fn event_id(&self) -> &ddd_4_rust_core::EventId {
+        &self.id
+    }
+
+    /// 返回事件类型。
+    fn event_type(&self) -> &ddd_4_rust_core::EventType {
+        &self.kind
+    }
+
+    /// 返回事件时间戳。
+    fn event_timestamp(&self) -> &chrono::DateTime<chrono::Utc> {
+        &self.timestamp
+    }
+
+    /// 返回关联 ID。
+    fn correlation_id(&self) -> Option<&ddd_4_rust_core::EventId> {
+        None
+    }
+
+    /// 返回因果 ID。
+    fn causation_id(&self) -> Option<&ddd_4_rust_core::EventId> {
+        None
+    }
+}
+
+impl DomainEvent<dyn EntityId> for StubDomainEvent {
+    /// 返回实体 ID 路径。
+    fn entity_id_path(&self) -> &ddd_4_rust_core::EntityIdPath {
+        &self.path
+    }
+
+    /// 返回实体 ID。
+    fn entity_id(&self) -> &(dyn EntityId + 'static) {
+        &self.entity
+    }
+
+    /// 返回聚合版本。
+    fn aggregate_version(&self) -> Option<&ddd_4_rust_core::AggregateVersion> {
+        Some(&self.version)
+    }
+}
